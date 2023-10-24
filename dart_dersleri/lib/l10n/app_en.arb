@@ -1,0 +1,34 @@
+{
+    "pizzaBaslik" : "Beef Cheese",
+    "peynirYazi" : "Cheese",
+    "sucukYazi" :  "Sausage",
+    "zeytinYazi" :  "Olive",
+    "biberYazi" : "Pepper",
+    "teslimatSure" : "20 min",
+    "teslimatBaslik" : "Delivery",
+    "pizzaAciklama" : "Meat lover, get ready to meet your pizza ! ",
+    "fiyat" :  "$ 5.98",
+    "buttonYazi" : "ADD TO CART",
+    "girisButon" : "GET STARTED",
+    "ekranKategori": "Category",
+    "sepetYazi" : "Add To Cart",
+    "kola" : "Coke",
+    "fanta" : "Fanta",
+    "icecekSecim" : "Beverage Selection",
+    "patatesK" : "P. Fry (Small)",
+    "patatesO" : "P. Fry (Middle)",
+    "patatesB" : "P. Fry (Big)",
+    "patatesSecim" : "Potato Selection",
+    "domates" : "Tomatoes",
+    "sogan": "Onion",
+    "tursu" : "Pickle",
+    "mayonez" : "Mayonnaise",
+    "garniturSecimi" : "Garnish Selection",
+    "menuDescription" : "Order the menu now and have your meal at your door instantly. Hamburger + French Fries + Canned Drink",
+    "menuBaslik" : "Hamburger"
+}
+
+
+
+
+
