@@ -1,9 +1,7 @@
-import 'package:dart_dersleri/Flutter/tasarim_calismasi/anasayfa.dart';
+import 'package:dart_dersleri/Flutter/widget_kullanimi/widget_anasayfa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'Flutter/bottom_nav_kullanimi/bottom_navigation_sayfa.dart';
 import 'Flutter/kullanici_etkilesimi/kullanici_etkilesimi_sayfa.dart';
 
 void main() {
@@ -30,9 +28,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        //useMaterial3: true,
       ),
-      home: KullaniciEtkilesimiSayfa(),
+      home: const WidgetAnaSayfa(),
     );
   }
 }

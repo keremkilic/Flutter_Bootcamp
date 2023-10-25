@@ -15,6 +15,7 @@ class _Odev4State extends State<Odev4> {
     var ekranBilgisi = MediaQuery.of(context);
     final double ekranYuksekligi = ekranBilgisi.size.height;
     final double ekranGenisligi = ekranBilgisi.size.width;
+
     print("Ekran yuksekliği : $ekranYuksekligi");
     print("Ekran genisliği : $ekranGenisligi");
 
@@ -35,7 +36,8 @@ class _Odev4State extends State<Odev4> {
                       builder: (context) => const Odev4SayfaA(),
                     ));
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
               child: const Text("SAYFA A' ya GİT"),
             ),
             ElevatedButton(
@@ -46,7 +48,8 @@ class _Odev4State extends State<Odev4> {
                       builder: (context) => const Odev4SayfaX(),
                     ));
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
               child: const Text("SAYFA X' e GİT"),
             ),
           ],

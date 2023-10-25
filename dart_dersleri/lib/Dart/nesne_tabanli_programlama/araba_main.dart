@@ -44,7 +44,7 @@ void main() {
   nissan.bilgiAl();
   print("**********");
 */
-  var f = Fonksiyonlar();
+  var f  = Fonksiyonlar();
   f.selamla1();
 
   var gelenSonuc = f.selamla2();
@@ -56,3 +56,5 @@ void main() {
   print("Toplama Sonucu : $gelenToplam");
 
 }
+
+
