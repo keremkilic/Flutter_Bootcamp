@@ -5,31 +5,31 @@ void main() {
   var o2 = Odev2_1Sayfa();
 
   //Kilometreyi Mile çevirme
-  double sonuc = o2.soru1(45);
+  double sonuc = o2.soru1(7.9);
   print(sonuc);
 
   //Dikdörgen Alan Hesaplama
-  o2.dikdortgen(10, 20);
+  o2.dikdortgen(4, 6);
 
   //FAKTORİYEL HESAPLAMA
-  int gelenDeger = o2.faktoriyel(4);
+  int gelenDeger = o2.faktoriyel(5);
   print("Faktoriyel Sonuc : $gelenDeger");
 
   //kelime içinde kaç adet e harfi
-  o2.harfBulma("eskisehir", "e");
+  o2.harfBulma("ankara", "a");
 
   //İç Açıların toplamı
   var o2_2 = Odev2_2Sayfa();
-  int icAciSonuc = o2_2.IcAciToplama(5);
+  double icAciSonuc = o2_2.IcAciToplama(6);
   print("İç Açıların Toplamı : $icAciSonuc");
 
   // Maas hesaplama
-  int gelenMaas = o2_2.maasHesaplama(20);
+  int gelenMaas = o2_2.maasHesaplama(15);
   print("Maaş : $gelenMaas");
 
 
   //OTOPARK UCRET HESAPLAMA
-  int gelenUcret =o2_2.otoparkUcretHesaplama(3);
+  int gelenUcret =o2_2.otoparkUcretHesaplama(6);
   print("Otopark ucreti : $gelenUcret");
 
 

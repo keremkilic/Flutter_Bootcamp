@@ -1,7 +1,7 @@
 class Odev2_2Sayfa {
     // İç Açıların Toplamanı
-    int IcAciToplama(int kenarSayisi) {
-      int toplam = (kenarSayisi-2) * 180;
+    double IcAciToplama(int kenarSayisi) {
+      double toplam = (kenarSayisi - 2) * 180 / kenarSayisi;
       return toplam;
     }
 

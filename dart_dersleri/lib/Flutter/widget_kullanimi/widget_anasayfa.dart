@@ -18,6 +18,16 @@ class _WidgetAnaSayfaState extends State<WidgetAnaSayfa> {
   double ilerleme = 30.0;
   var tfSaat = TextEditingController();
   var tfTarih = TextEditingController();
+  var ulkelerListesi = <String>[];
+  String secilenUlke = "Türkiye";
+
+  @override
+  void initState() {
+    super.initState();
+    ulkelerListesi.add("Türkiye");
+    ulkelerListesi.add("Italya");
+    ulkelerListesi.add("Japonya");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +39,8 @@ class _WidgetAnaSayfaState extends State<WidgetAnaSayfa> {
       appBar: AppBar(
         title: const Text("Widgets Kullanımı"),
       ),
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
             children: [
               // TextField alanına girilen değeri gösterme
@@ -237,7 +247,8 @@ class _WidgetAnaSayfaState extends State<WidgetAnaSayfa> {
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2030),
                         ).then((value) {
-                          tfTarih.text = "${value!.day}/${value.month}/${value.year}";
+                          tfTarih.text =
+                              "${value!.day}/${value.month}/${value.year}";
                         });
                       },
                       icon: Icon(Icons.date_range_outlined)),
@@ -248,6 +259,36 @@ class _WidgetAnaSayfaState extends State<WidgetAnaSayfa> {
                 onPressed: () {
                   print("Tarih durum : ${tfTarih.text}");
                   print("Saat durum : ${tfSaat.text}");
+                },
+                child: const Text("Göster"),
+              ),
+              //DropDownmenu ve DropDownItem
+              DropdownButton(
+                value: secilenUlke,
+                icon: const Icon(Icons.arrow_drop_down),
+                items: ulkelerListesi.map((ulke) {
+                  return DropdownMenuItem(value: ulke, child: Text(ulke));
+                }).toList(),
+                onChanged: (veri) {
+                  setState(() {
+                    secilenUlke = veri!;
+                  });
+                },
+              ),
+              GestureDetector(
+                  onTap: () {
+                    print("Container tek tıklandı");
+                  },
+                  onDoubleTap: () {
+                    print("Container çift tıklandı");
+                  },
+                  onLongPress: () {
+                    print("Container uzerine uzun basıldı");
+                  },
+                  child: Container(width: 200, height: 200, color: Colors.red,)),
+              ElevatedButton(
+                onPressed: () {
+                  print("Ulke durum : $secilenUlke");
                 },
                 child: const Text("Göster"),
               ),
