@@ -1,4 +1,4 @@
-import 'package:dart_dersleri/Flutter/kisiler_uygulamasi/ui/views/kisiler_anasayfa.dart';
+import 'package:dart_dersleri/Flutter/filmler_uygulamasi/ui/views/filmler_uyg_anaSayfa.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const KisiAnaSayfa(),
+      home: const FilmlerUygAnaSayfa(),
     );
   }
 }

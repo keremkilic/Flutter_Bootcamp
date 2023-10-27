@@ -324,7 +324,7 @@ class NumberButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               color: buttonColors,
-              borderRadius: BorderRadius.all(Radius.circular(25))),
+              borderRadius: const BorderRadius.all(Radius.circular(25))),
           child: Center(
               child: Text(
             icerik,
