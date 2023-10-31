@@ -1,37 +1,23 @@
-import 'package:dart_dersleri/Flutter/kisiler_uygulamasi/data/entity/kisiler.dart';
+import 'package:dart_dersleri/Flutter/kisiler_uygulamasi/ui/cubit/kayit_sayfa_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class KisiDetaySayfa extends StatefulWidget {
-  Kisiler kisi;
-
-
-  KisiDetaySayfa({required this.kisi});
+class KisiKayitSayfa extends StatefulWidget {
+  const KisiKayitSayfa({Key? key}) : super(key: key);
 
   @override
-  State<KisiDetaySayfa> createState() => _KisiDetaySayfaState();
+  State<KisiKayitSayfa> createState() => _KisiKayitSayfaState();
 }
 
-class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
+class _KisiKayitSayfaState extends State<KisiKayitSayfa> {
   TextEditingController tfKisiAd = TextEditingController();
   TextEditingController tfKisiTel = TextEditingController();
-
-  Future<void> guncelle(int kisi_id, String kisi_ad, String kisi_tel) async {
-    print("Kişi Güncelle : $kisi_id - $kisi_ad - ${kisi_tel}");
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    var kisi = widget.kisi;
-    tfKisiAd.text = kisi.kisi_ad;
-    tfKisiTel.text = kisi.kisi_tel;
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kişi Detay Sayfa"),
+        title: const Text("Kişi Kayıt Sayfa"),
       ),
       body: Center(
         child: Padding(
@@ -53,9 +39,9 @@ class _KisiDetaySayfaState extends State<KisiDetaySayfa> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  guncelle(widget.kisi.kisi_id, tfKisiAd.text, tfKisiTel.text);
+                  context.read<KayitSayfaCubit>().kaydet(tfKisiAd.text, tfKisiTel.text);
                 },
-                child: const Text("Güncelle"),
+                child: const Text("Kaydet"),
               ),
             ],
           ),
