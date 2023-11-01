@@ -1,35 +1,32 @@
-import 'package:dart_dersleri/Flutter/kisiler_uygulamasi/data/entity/kisiler.dart';
-import 'package:dart_dersleri/Flutter/kisiler_uygulamasi/ui/views/kisiler_detay.dart';
-import 'package:dart_dersleri/Flutter/kisiler_uygulamasi/ui/views/kisiler_kayit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sqlite_calismasi/data/entity/kisiler.dart';
+import 'package:sqlite_calismasi/ui/cubit/anasayfa_cubit.dart';
+import 'package:sqlite_calismasi/ui/views/detay.dart';
+import 'package:sqlite_calismasi/ui/views/kayit.dart';
 
-class KisiAnaSayfa extends StatefulWidget {
-  const KisiAnaSayfa({Key? key}) : super(key: key);
+class AnaSayfa extends StatefulWidget {
+  const AnaSayfa({Key? key}) : super(key: key);
 
   @override
-  State<KisiAnaSayfa> createState() => _KisiAnaSayfaState();
+  State<AnaSayfa> createState() => _AnaSayfaState();
 }
 
-class _KisiAnaSayfaState extends State<KisiAnaSayfa> {
+class _AnaSayfaState extends State<AnaSayfa> {
   bool aramaYapiliyorMu = false;
 
   Future<void> ara(String aramaKelimesi) async {
     print("Kisi Ara : $aramaKelimesi");
   }
 
-  Future<List<Kisiler>> kisileriYukle() async {
-    var kisilerListesi = <Kisiler>[];
-    var k1 = Kisiler(kisi_id: 1, kisi_ad: "Ahmet", kisi_tel: "11111");
-    var k2 = Kisiler(kisi_id: 2, kisi_ad: "Zeynep", kisi_tel: "22222");
-    var k3 = Kisiler(kisi_id: 3, kisi_ad: "Beyza", kisi_tel: "33333");
-    kisilerListesi.add(k1);
-    kisilerListesi.add(k2);
-    kisilerListesi.add(k3);
-    return kisilerListesi;
+   Future<void> sil(int kisi_id) async {
+    print("Kisi Sil : $kisi_id");
   }
 
-  Future<void> sil(int kisi_id) async {
-    print("Kisi Sil : $kisi_id");
+  @override
+  void initState() {
+    super.initState();
+    context.read<AnaSayfaCubit>().kisileriYukle();
   }
 
   @override
@@ -38,37 +35,36 @@ class _KisiAnaSayfaState extends State<KisiAnaSayfa> {
       appBar: AppBar(
         title: aramaYapiliyorMu
             ? TextField(
-                decoration: const InputDecoration(hintText: "Ara"),
-                onChanged: (aramaSonucu) {
-                  ara(aramaSonucu);
-                },
-              )
+          decoration: const InputDecoration(hintText: "Ara"),
+          onChanged: (aramaSonucu) {
+            context.read<AnaSayfaCubit>().ara(aramaSonucu);
+          },
+        )
             : const Text("Kişiler"),
         actions: [
           aramaYapiliyorMu
               ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      aramaYapiliyorMu = false;
-                    });
-                  },
-                  icon: const Icon(Icons.clear))
+              onPressed: () {
+                setState(() {
+                  aramaYapiliyorMu = false;
+                });
+                context.read<AnaSayfaCubit>().kisileriYukle();
+              },
+              icon: const Icon(Icons.clear))
               : IconButton(
-                  onPressed: () {
-                    setState(() {
-                      aramaYapiliyorMu = true;
-                    });
-                  },
-                  icon: const Icon(Icons.search_outlined)),
+              onPressed: () {
+                setState(() {
+                  aramaYapiliyorMu = true;
+                });
+              },
+              icon: const Icon(Icons.search_outlined)),
         ],
       ),
-      body: FutureBuilder<List<Kisiler>>(
-        future: kisileriYukle(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var kisilerListesi = snapshot.data;
+      body: BlocBuilder<AnaSayfaCubit, List<Kisiler>>(
+        builder: (context, kisilerListesi) {
+          if (kisilerListesi.isNotEmpty) {
             return ListView.builder(
-              itemCount: kisilerListesi!.length,
+              itemCount: kisilerListesi.length,
               itemBuilder: (context, index) {
                 var kisi = kisilerListesi[index];
                 return GestureDetector(
@@ -78,7 +74,7 @@ class _KisiAnaSayfaState extends State<KisiAnaSayfa> {
                         MaterialPageRoute(
                           builder: (context) => KisiDetaySayfa(kisi: kisi),
                         )).then((value) {
-                      print("Anasayfaya dönüldü");
+                      context.read<AnaSayfaCubit>().kisileriYukle();
                     });
                   },
                   child: Card(
@@ -104,18 +100,18 @@ class _KisiAnaSayfaState extends State<KisiAnaSayfa> {
                           ),
                           const Spacer(),
                           IconButton(
-                            icon: const Icon(Icons.cancel_outlined,
+                            icon: const Icon(Icons.clear,
                                 size: 30,
                                 color: Colors.black54),
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("${kisi.kisi_ad} silinsin mi ?"),
-                                  action: SnackBarAction(label: "EVET", onPressed: () {
-                                    sil(kisi.kisi_id);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(content: Text("Kayıt silindi"),
-                                    ),);
-                                  },),
+                                  SnackBar(
+                                    content: Text("${kisi.kisi_ad} silinsin mi ?"),
+                                    action: SnackBarAction(
+                                      label: "EVET",
+                                      onPressed: () {
+                                        context.read<AnaSayfaCubit>().sil(kisi.kisi_id);
+                                    },),
                                   )
                               );
                             },
@@ -140,7 +136,7 @@ class _KisiAnaSayfaState extends State<KisiAnaSayfa> {
               MaterialPageRoute(
                 builder: (context) => const KisiKayitSayfa(),
               )).then((value) {
-            print("Anasayfaya dönüldü");
+            context.read<AnaSayfaCubit>().kisileriYukle();
           });
         },
       ),
