@@ -26,6 +26,11 @@ class _Odev7AnaSayfaState extends State<Odev7AnaSayfa> {
 
   @override
   Widget build(BuildContext context) {
+    var ekranbilgisi = MediaQuery.of(context);
+    double ekranYuksekligi = ekranbilgisi.size.height;
+    double ekranGenisligi = ekranbilgisi.size.width;
+    print("Ekran Yüksekliği : $ekranYuksekligi");
+    print("Ekran Genisliği : $ekranGenisligi");
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -81,7 +86,7 @@ class _Odev7AnaSayfaState extends State<Odev7AnaSayfa> {
                         child: Card(
                           color: cardColor,
                           child: SizedBox(
-                            height: 150,
+                            height: ekranYuksekligi / 7,
                             child: Row(
                               children: [
                                 Padding(
