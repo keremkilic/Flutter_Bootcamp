@@ -41,6 +41,7 @@ dependencies:
   flutter_bloc:
   shared_preferences:
   animated_splash_screen: ^1.3.0
+  dio:
 
   path:
   sqflite:
