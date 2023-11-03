@@ -29,8 +29,7 @@ class _Odev7AnaSayfaState extends State<Odev7AnaSayfa> {
     var ekranbilgisi = MediaQuery.of(context);
     double ekranYuksekligi = ekranbilgisi.size.height;
     double ekranGenisligi = ekranbilgisi.size.width;
-    print("Ekran Yüksekliği : $ekranYuksekligi");
-    print("Ekran Genisliği : $ekranGenisligi");
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -69,75 +68,78 @@ class _Odev7AnaSayfaState extends State<Odev7AnaSayfa> {
               itemCount: todoListesi.length,
               itemBuilder: (context, index) {
                 var todos = todoListesi[index];
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Odev7Detay(todo: todos),
-                              )).then((value) {
-                            context.read<Odev7AnaSayfaCubit>().toDoliste();
-                          });
-                        },
-                        child: Card(
-                          color: cardColor,
-                          child: SizedBox(
-                            height: ekranYuksekligi / 7,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        todos.name,
-                                        style: const TextStyle(
-                                            fontSize: 20, color: textColor),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        todos.description,
-                                        style: const TextStyle(color: textColor),
-                                      ),
-                                    ],
+                return SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Odev7Detay(todo: todos),
+                                )).then((value) {
+                              context.read<Odev7AnaSayfaCubit>().toDoliste();
+                            });
+                          },
+                          child: Card(
+                            color: cardColor,
+                            child: SizedBox(
+                              height: ekranYuksekligi / 7,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          todos.name,
+                                          style: const TextStyle(
+                                              fontSize: 20, color: textColor),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          todos.description,
+                                          style: const TextStyle(color: textColor),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                const Spacer(),
-                                Container(height: 150, width: 1, color: textColor),
-                                IconButton(
-                                  icon: const Icon(Icons.clear, color: textColor,),
-                                  onPressed: () {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      backgroundColor: cardColor,
-                                      content: Text("${todos.name} silinsin mi ?", style: const TextStyle(color: textColor),),
-                                      action: SnackBarAction(
-                                        label: "EVET",
-                                        textColor: textColor,
-                                        onPressed: () {
-                                          context.read<Odev7AnaSayfaCubit>().sil(todos.id);
-                                        },
-                                      ),
-                                    ));
-                                  },
-                                ),
-                              ],
+                                  const Spacer(),
+                                  Container(height: 150, width: 1, color: textColor),
+                                  IconButton(
+                                    icon: const Icon(Icons.clear, color: textColor,),
+                                    onPressed: () {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        backgroundColor: textColor,
+                                        content: Text("${todos.name} silinsin mi ?", style: const TextStyle(color: cardColor),),
+                                        action: SnackBarAction(
+                                          label: "EVET",
+                                          textColor: cardColor,
+                                          onPressed: () {
+                                            context.read<Odev7AnaSayfaCubit>().sil(todos.id);
+                                          },
+                                        ),
+                                      ));
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: Container(height: 2, color: Colors.grey.shade400),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Container(height: 2, color: Colors.grey.shade400),
+                      ),
+                    ],
+                  ),
                 );
               },
             );

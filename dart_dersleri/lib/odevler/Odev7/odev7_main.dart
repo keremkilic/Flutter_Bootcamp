@@ -1,3 +1,5 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:dart_dersleri/odevler/Odev7/data/const/constants.dart';
 import 'package:dart_dersleri/odevler/Odev7/ui/cubit/odev7_anasayfa_cubit.dart';
 import 'package:dart_dersleri/odevler/Odev7/ui/cubit/odev7_detay_cubit.dart';
 import 'package:dart_dersleri/odevler/Odev7/ui/cubit/odev7_kayit_cubit.dart';
@@ -29,7 +31,22 @@ class MyApp extends StatelessWidget {
           //useMaterial3: true,
         ),
          */
-        home: const Odev7AnaSayfa(),
+        home: AnimatedSplashScreen(
+          backgroundColor: backgroundColor,
+          splash: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("ToDo", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: cardColor),),
+              const SizedBox(height: 10),
+              Expanded(child: Image.asset("assets/images/todo.png")),
+            ],
+          ),
+          nextScreen: const Odev7AnaSayfa(),
+          splashTransition: SplashTransition.scaleTransition,
+          animationDuration: const Duration(milliseconds: 1500),
+          duration: 2500,
+          splashIconSize: 250,
+        ),
       ),
     );
   }
